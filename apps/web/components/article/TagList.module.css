@@ -1,0 +1,48 @@
+/* TagList.module.css */
+
+.section {
+  background: var(--paper);
+  padding: 8px 0 64px;
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.column {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--rule);
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.label {
+  color: var(--body-soft);
+  font-weight: 500;
+}
+
+.pill {
+  color: var(--tag);
+  border: 1.5px solid var(--tag);
+  padding: 6px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 24px;
+  }
+}

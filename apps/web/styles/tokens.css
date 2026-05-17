@@ -1,0 +1,29 @@
+/* tokens.css
+ *
+ * Meridian design tokens — sourced from the standalone HTML prototype and the
+ * project README. Agent D may mutate --accent, --accent-2, --tag at runtime
+ * via document.documentElement.style.setProperty when the title-band hue is
+ * swapped in the dev panel.
+ */
+
+:root {
+  /* ── Color palette ──────────────────────────────────────────────── */
+  --ink:        #0B1F3A;   /* primary navy — header, footer, pull-quote bg */
+  --ink-2:      #142B4A;
+  --ink-soft:   #1E3556;
+  --paper:      #F4F1EB;   /* page background */
+  --paper-2:    #ECE7DD;
+  --rule:       #D5CFC2;   /* hairline rules */
+  --body:       #1D2A40;   /* body text */
+  --body-soft:  #475569;
+  --accent:     #C2410C;   /* title-band amber — swappable per the dev panel */
+  --accent-2:   #E0530C;
+  --link:       #1F4F8F;
+  --tag:        #C2410C;
+
+  /* ── Type families ──────────────────────────────────────────────── */
+  /* The --font-display, --font-sans, --font-serif, --font-mono variables
+     are populated by next/font in `app/layout.tsx` (applied to <html>).
+     They intentionally do not have a default here — letting next/font own
+     them avoids order-of-cascade surprises during hydration. */
+}

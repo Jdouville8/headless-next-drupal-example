@@ -1,0 +1,59 @@
+/* Breadcrumb.module.css */
+
+.wrapper {
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  font-size: 13px;
+  color: var(--link);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.homeLink {
+  display: flex;
+  color: var(--link);
+}
+
+.pillLink {
+  color: var(--link);
+  text-decoration: none;
+  background: #E9E5DC;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.currentPill {
+  color: var(--body-soft);
+  background: #E9E5DC;
+  padding: 6px 12px;
+  border-radius: 999px;
+  max-width: 720px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sep {
+  display: inline-flex;
+  color: var(--body-soft);
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .currentPill {
+    max-width: 60vw;
+  }
+}

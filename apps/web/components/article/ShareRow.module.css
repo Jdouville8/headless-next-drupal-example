@@ -1,0 +1,40 @@
+/* ShareRow.module.css */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.label {
+  color: var(--paper);
+  font-weight: 500;
+}
+
+.btn {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(244, 241, 235, 0.85);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: rgba(244, 241, 235, 0.08);
+}
+
+.toast {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.85;
+  margin-left: 4px;
+}

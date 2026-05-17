@@ -1,0 +1,263 @@
+/* ArticleReferencePanel.module.css
+ *
+ * Chrome for the floating dev/QA panel. Ported from the prototype's
+ * `tweaks-panel.jsx` __TWEAKS_STYLE block — values were copied verbatim
+ * (glass blur, 14px radius, 11.5px system font, segmented thumb easing) so
+ * the Next.js panel looks identical to what design signed off on.
+ *
+ * Local to this component — no global side effects beyond the runtime
+ * `body.show-json` class and the `--accent` / `--accent-2` / `--tag` vars
+ * mutated by the React component. Agent C owns the CSS that interprets
+ * `body.show-json`; this stylesheet only renders the panel itself.
+ */
+
+/* The panel sits ABOVE Agent C's FloatingUtils (back-to-top + live-chat
+ * tiles ~48px each, stacked with a gap). Offset the bottom by 140px so the
+ * column doesn't overlap the tiles. The prototype used 16px because it had
+ * no floating utilities. */
+.panel {
+  position: fixed;
+  right: 16px;
+  bottom: 140px;
+  z-index: 2147483646;
+  width: 280px;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(250, 249, 247, 0.78);
+  color: #29261b;
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 12px 40px rgba(0, 0, 0, 0.18);
+  font:
+    11.5px/1.4 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8px 10px 14px;
+  user-select: none;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.closeBtn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(41, 38, 27, 0.55);
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #29261b;
+}
+
+.body {
+  padding: 2px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 2px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.section {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(41, 38, 27, 0.45);
+  padding: 10px 0 0;
+}
+
+.section:first-child {
+  padding-top: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rowHorizontal {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: rgba(41, 38, 27, 0.72);
+}
+
+.label > span:first-child {
+  font-weight: 500;
+}
+
+/* ── Toggle ───────────────────────────────────────────────────────── */
+
+.toggle {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: background 0.15s;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.toggleOn {
+  background: #34c759;
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s;
+}
+
+.toggleOn .toggleThumb {
+  transform: translateX(14px);
+}
+
+/* ── Segmented radio ──────────────────────────────────────────────── */
+
+.seg {
+  position: relative;
+  display: flex;
+  padding: 2px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  user-select: none;
+}
+
+.segThumb {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition:
+    left 0.15s cubic-bezier(0.3, 0.7, 0.4, 1),
+    width 0.15s;
+}
+
+.segBtn {
+  appearance: none;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  min-height: 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+/* ── Collapsed pill ───────────────────────────────────────────────── */
+
+.pill {
+  position: fixed;
+  right: 16px;
+  bottom: 140px;
+  z-index: 2147483646;
+  appearance: none;
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  background: rgba(250, 249, 247, 0.85);
+  color: #29261b;
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  border-radius: 999px;
+  height: 34px;
+  padding: 0 14px;
+  font:
+    600 11.5px/1
+      ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+.pill:hover {
+  background: rgba(250, 249, 247, 0.95);
+}
+
+.pillDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent, #c2410c);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+}

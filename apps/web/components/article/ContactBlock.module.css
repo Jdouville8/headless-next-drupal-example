@@ -1,0 +1,47 @@
+/* ContactBlock.module.css */
+
+.section {
+  background: var(--paper);
+  padding: 0 0 24px;
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.column {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.02;
+  text-transform: uppercase;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.body {
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.email {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 24px;
+  }
+}

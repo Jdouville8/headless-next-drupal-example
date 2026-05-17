@@ -1,0 +1,154 @@
+/* SiteFooter.module.css */
+
+.footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding-top: 64px;
+  padding-bottom: 56px;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.3fr 1fr;
+  gap: 48px;
+}
+
+.colHeading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  font-size: 15px;
+  margin-bottom: 22px;
+  color: var(--paper);
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.linkItem {
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.partnerships {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.partnershipPipe {
+  opacity: 0.35;
+}
+
+.partnership {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  max-width: 110px;
+  line-height: 1.15;
+}
+
+.partnershipFootnote {
+  margin-top: 28px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+}
+
+.social {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.socialLink {
+  color: var(--paper);
+  display: inline-flex;
+}
+
+.legalList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.taglineRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.taglineMark {
+  width: 56px;
+  height: 56px;
+  background: var(--paper);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+
+.taglinePrimary {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-size: 22px;
+  color: var(--paper);
+}
+
+.taglineSecondary {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+  color: var(--paper);
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 24px;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

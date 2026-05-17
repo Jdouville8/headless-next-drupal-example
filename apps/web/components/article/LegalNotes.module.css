@@ -1,0 +1,34 @@
+/* LegalNotes.module.css */
+
+.section {
+  background: var(--paper);
+  padding: 24px 0 32px;
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.column {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--body);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.note {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 24px;
+  }
+}

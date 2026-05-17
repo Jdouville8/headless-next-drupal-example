@@ -1,0 +1,166 @@
+/* SiteHeader.module.css */
+
+.header {
+  /* The header is two stacked bands; styling lives on the child bands. */
+}
+
+/* ── Utility bar ───────────────────────────────────────────────────── */
+.utility {
+  background: #E9E5DC;
+  border-top: 3px solid var(--accent);
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.utilityInner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  height: 44px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.utilityBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  height: 100%;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.region {
+  margin-left: 12px;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #D8D2C2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+}
+
+/* ── Brand row ─────────────────────────────────────────────────────── */
+.brandBand {
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.brandInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.brandLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brandMark {
+  width: 46px;
+  height: 46px;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 1;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.005em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: var(--ink);
+}
+
+.brandEyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  color: var(--accent);
+}
+
+.primaryNav {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+.navLink,
+.navLinkActive {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.navLinkActive {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 1024px) {
+  .utilityInner,
+  .brandInner {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .utilityInner {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 8px 24px;
+    justify-content: flex-start;
+  }
+  .utilityBtn {
+    padding: 4px 12px;
+  }
+  .region {
+    margin-left: 0;
+  }
+  .primaryNav {
+    gap: 18px;
+  }
+  .navLink,
+  .navLinkActive {
+    font-size: 14px;
+  }
+}

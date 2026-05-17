@@ -1,0 +1,164 @@
+/* ArticleBody.module.css */
+
+.paperSection {
+  background: var(--paper);
+  padding: 72px 0;
+}
+
+.paperInner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.paperColumn {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* RichText */
+.richText {
+  font-size: 17px;
+  line-height: 1.72;
+  color: var(--body);
+}
+
+.richText :global(p) {
+  margin: 0 0 1.1em;
+}
+
+.richText :global(p:last-child) {
+  margin-bottom: 0;
+}
+
+.richText :global(a) {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.richText :global(strong) {
+  font-weight: 700;
+}
+
+.richText :global(em) {
+  font-style: italic;
+}
+
+.richText :global(sup) {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* PullQuote */
+.quoteBand {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 80px 0;
+  margin: 0;
+}
+
+.quoteInner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.quoteGrid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 56px;
+  align-items: start;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  border-left: 1px solid rgba(244, 241, 235, 0.55);
+}
+
+.portraitFrame {
+  width: 220px;
+  aspect-ratio: 1 / 1;
+  background:
+    linear-gradient(160deg, #3A4863 0%, #1E2A40 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.portraitStripes {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(244, 241, 235, 0.05) 0 14px,
+    transparent 14px 30px
+  );
+}
+
+.portraitLabel {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(244, 241, 235, 0.7);
+  text-transform: uppercase;
+}
+
+.portraitImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authorBlock {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.authorName {
+  font-weight: 600;
+}
+
+.authorTitle,
+.authorOrg {
+  opacity: 0.85;
+}
+
+.quote {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+  .paperInner,
+  .quoteInner {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .paperSection {
+    padding: 48px 0;
+  }
+  .quoteBand {
+    padding: 56px 0;
+  }
+  .quoteGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-left: 16px;
+  }
+  .quote {
+    font-size: 22px;
+  }
+}
