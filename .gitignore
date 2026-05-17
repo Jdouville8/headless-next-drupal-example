@@ -5,7 +5,9 @@ node_modules/
 # next.js
 apps/web/.next/
 apps/web/out/
-apps/web/next-env.d.ts
+
+# typescript incremental build info
+**/tsconfig.tsbuildinfo
 
 # env
 .env
