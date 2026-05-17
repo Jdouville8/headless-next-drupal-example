@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Newsroom — Article Reference</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0B1F3A;
+    --ink-2:#142B4A;
+    --ink-soft:#1E3556;
+    --paper:#F4F1EB;
+    --paper-2:#ECE7DD;
+    --body:#1D2A40;
+    --body-soft:#475569;
+    --rule:#D5CFC2;
+    --accent:#C2410C;       /* amber */
+    --accent-2:#E0530C;
+    --link:#1F4F8F;
+    --tag:#C2410C;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--body);
+    font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:var(--link)}
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
+  .display{font-family:"Barlow Condensed",sans-serif;font-weight:800;letter-spacing:.005em;line-height:1.02;text-transform:uppercase}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+
+  /* ── Annotation overlay (JSON mapping mode) ─────────────────────────────── */
+  [data-jsonblock]{position:relative;outline:0 solid transparent;transition:outline-color .15s}
+  body.show-json [data-jsonblock]{outline:1px dashed rgba(194,65,12,.5);outline-offset:-1px}
+  body.show-json [data-jsonblock]::before{
+    content:attr(data-jsonblock);
+    position:absolute;top:-1px;left:-1px;z-index:50;
+    background:#0B1F3A;color:#F4F1EB;
+    font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.04em;
+    padding:3px 7px;border-bottom-right-radius:4px;
+    pointer-events:none;
+    text-transform:none;
+    white-space:nowrap;
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" fill="#0B1F3A"/>
+    <rect x="30" y="60" width="140" height="80" fill="#C2410C"/>
+    <rect x="40" y="78" width="100" height="10" fill="#F4F1EB"/>
+    <rect x="40" y="94" width="120" height="10" fill="#F4F1EB"/>
+    <rect x="40" y="110" width="70"  height="10" fill="#F4F1EB"/>
+    <rect x="30" y="30" width="36" height="20" fill="#F4F1EB"/>
+    <rect x="30" y="150" width="140" height="6" fill="#F4F1EB" opacity=".5"/>
+    <rect x="30" y="162" width="100" height="6" fill="#F4F1EB" opacity=".4"/>
+    <rect x="30" y="174" width="120" height="6" fill="#F4F1EB" opacity=".4"/>
+  </svg>
+</template>
+<div id="root"></div>
+
+<script type="text/babel" src="article-data.jsx"></script>
+<script type="text/babel" src="article-components.jsx"></script>
+<script type="text/babel" src="article-app.jsx"></script>
+</body>
+</html>

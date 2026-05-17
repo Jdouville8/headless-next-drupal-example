@@ -1,0 +1,16 @@
+{
+  "name": "meridian-newsroom",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Newsroom article page — Drupal (headless) + Next.js",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "typecheck": "pnpm --filter web typecheck"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@10.0.0"
+}

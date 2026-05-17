@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# next.js
+apps/web/.next/
+apps/web/out/
+apps/web/next-env.d.ts
+
+# env
+.env
+.env.local
+.env*.local
+!.env.local.example
+
+# drupal (when Agent A runs)
+apps/drupal/web/sites/default/files/
+apps/drupal/web/sites/default/settings.local.php
+apps/drupal/vendor/
+apps/drupal/.ddev/.global_commands/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
