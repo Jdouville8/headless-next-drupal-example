@@ -1,0 +1,24 @@
+uuid: d4558c1e-d2ba-419a-afbc-401334135810
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_author
+    - node.type.press_person
+    - paragraphs.paragraphs_type.pull_quote
+id: paragraph.pull_quote.field_author
+field_name: field_author
+entity_type: paragraph
+bundle: pull_quote
+label: Author
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      press_person: press_person
+field_type: entity_reference

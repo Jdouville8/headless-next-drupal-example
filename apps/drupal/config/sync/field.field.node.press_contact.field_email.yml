@@ -1,0 +1,19 @@
+uuid: 93b88550-9562-4b51-a3df-44271f960c3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email
+    - node.type.press_contact
+id: node.press_contact.field_email
+field_name: field_email
+entity_type: node
+bundle: press_contact
+label: Email
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

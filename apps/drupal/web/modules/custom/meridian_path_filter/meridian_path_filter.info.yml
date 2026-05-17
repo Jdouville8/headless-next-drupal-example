@@ -1,0 +1,8 @@
+name: 'Meridian JSON:API path.alias filter'
+description: 'Lets the Next.js adapter query `filter[*][condition][path]=path.alias` on node resources by translating it to a `drupal_internal__nid` lookup. Works around the long-standing Drupal core limitation where the computed `path` field is not SQL-queryable via EntityQuery.'
+type: module
+core_version_requirement: ^10 || ^11
+package: Meridian
+dependencies:
+  - drupal:jsonapi
+  - drupal:path_alias

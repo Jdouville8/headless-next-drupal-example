@@ -1,0 +1,20 @@
+uuid: 9bffc68b-7a4d-48fc-9c0f-ec186644e8eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_read_minutes
+field_name: field_read_minutes
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

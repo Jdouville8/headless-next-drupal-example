@@ -1,0 +1,21 @@
+uuid: 4346e886-cf81-4e80-9615-d1610df2352d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_dateline_location
+field_name: field_dateline_location
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

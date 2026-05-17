@@ -1,0 +1,19 @@
+uuid: 87db1da4-c993-4f66-a948-7017d32fcbf1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dateline_location
+    - node.type.article
+id: node.article.field_dateline_location
+field_name: field_dateline_location
+entity_type: node
+bundle: article
+label: 'Dateline / Location'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,9 @@
+uuid: 58223a94-ff77-46f4-8aba-21004443ce03
+langcode: en
+status: true
+dependencies: {  }
+name: 'Article Tags'
+vid: article_tags
+description: 'Tags for newsroom articles (adapter expects vid = article_tags).'
+weight: 0
+new_revision: false

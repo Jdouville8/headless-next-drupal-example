@@ -1,0 +1,11 @@
+uuid: 1e6cffe3-21cb-4b78-a676-149841a0f3dc
+langcode: en
+status: true
+dependencies: {  }
+name: 'Press person'
+type: press_person
+description: null
+help: null
+new_revision: false
+preview_mode: 1
+display_submitted: true

@@ -18,7 +18,13 @@ apps/web/out/
 # drupal (when Agent A runs)
 apps/drupal/web/sites/default/files/
 apps/drupal/web/sites/default/settings.local.php
+apps/drupal/web/sites/default/settings.ddev.php
 apps/drupal/vendor/
+apps/drupal/web/core/
+apps/drupal/web/modules/contrib/
+apps/drupal/web/themes/contrib/
+apps/drupal/web/profiles/contrib/
+apps/drupal/web/libraries/
 apps/drupal/.ddev/.global_commands/
 
 # logs

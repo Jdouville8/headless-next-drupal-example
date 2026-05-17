@@ -1,0 +1,6 @@
+services:
+  meridian_path_filter.request_subscriber:
+    class: Drupal\meridian_path_filter\EventSubscriber\PathAliasFilterRewriter
+    arguments: ['@path_alias.manager']
+    tags:
+      - { name: event_subscriber }

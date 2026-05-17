@@ -1,0 +1,19 @@
+uuid: 43f3d6c3-4038-4a78-85d8-e39157b0a24d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_organization
+    - node.type.press_person
+id: node.press_person.field_organization
+field_name: field_organization
+entity_type: node
+bundle: press_person
+label: Organization
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

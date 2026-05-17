@@ -1,0 +1,24 @@
+uuid: 8197ae74-3a57-4823-be69-c9388a31ef6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_press_contact
+    - node.type.article
+    - node.type.press_contact
+id: node.article.field_press_contact
+field_name: field_press_contact
+entity_type: node
+bundle: article
+label: 'Press contact'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      press_contact: press_contact
+field_type: entity_reference

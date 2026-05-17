@@ -1,0 +1,19 @@
+uuid: 728f3217-1852-42df-8908-67ce09d5819a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_portrait_alt
+    - node.type.press_person
+id: node.press_person.field_portrait_alt
+field_name: field_portrait_alt
+entity_type: node
+bundle: press_person
+label: 'Portrait alt text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

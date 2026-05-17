@@ -1,0 +1,19 @@
+uuid: 3274bffc-ee4c-4016-9d3f-095e5339ac31
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_organization
+    - node.type.press_contact
+id: node.press_contact.field_organization
+field_name: field_organization
+entity_type: node
+bundle: press_contact
+label: Organization
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

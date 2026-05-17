@@ -1,0 +1,24 @@
+uuid: 435c6371-4707-4863-ad85-1927081c40ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_portrait
+    - media.type.image
+    - node.type.press_person
+id: node.press_person.field_portrait
+field_name: field_portrait
+entity_type: node
+bundle: press_person
+label: Portrait
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+field_type: entity_reference
