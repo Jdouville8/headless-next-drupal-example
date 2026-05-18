@@ -39,6 +39,8 @@ const INCLUDE = [
   "field_hero_media.field_media_image",
   "field_body",
   "field_body.field_author",
+  "field_body.field_author.field_portrait",
+  "field_body.field_author.field_portrait.field_media_image",
   "field_press_contact",
   "field_tags",
 ].join(",");
@@ -154,11 +156,29 @@ function richTextValue(
   return "";
 }
 
+/**
+ * Like `richTextValue`, but prefers the raw `value` over `processed`. Use this
+ * for fields the contract requires as plain text — Drupal's `plain_text`
+ * filter wraps the processed output in `<p>` and HTML-entity-encodes
+ * characters like apostrophes, which we don't want leaking into UI strings.
+ */
+function plainTextValue(
+  v: ParagraphRichTextAttributes["field_text"] | NodeArticleAttributes["field_summary"],
+): string {
+  if (!v) return "";
+  if (typeof v === "string") return v;
+  if (typeof v === "object" && v !== null) {
+    if ("value" in v && typeof v.value === "string") return v.value;
+    if ("processed" in v && typeof v.processed === "string") return v.processed;
+  }
+  return "";
+}
+
 function legalNotesValue(v: NodeArticleAttributes["field_legal_notes"]): string[] {
   if (!v) return [];
   if (!Array.isArray(v)) return [];
   return v
-    .map((entry) => (typeof entry === "string" ? entry : richTextValue(entry)))
+    .map((entry) => (typeof entry === "string" ? entry : plainTextValue(entry)))
     .filter((s): s is string => typeof s === "string" && s.length > 0);
 }
 
@@ -257,7 +277,7 @@ function normalizeBody(
       const quoteRaw = (para.attributes as ParagraphPullQuoteAttributes | undefined)?.field_quote;
       const block: PullQuoteBlock = {
         kind: "pull_quote",
-        quote: typeof quoteRaw === "string" ? quoteRaw : richTextValue(quoteRaw),
+        quote: typeof quoteRaw === "string" ? quoteRaw : plainTextValue(quoteRaw),
         author: {
           name: stringOr(authorAttrs.title, ""),
           title: stringOr(authorAttrs.field_role, ""),
