@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meridian Newsroom — Local Setup Guide</title>
+<style>
+  @page { size: Letter; margin: 0.6in 0.65in; }
+  html { font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; color: #111; }
+  body { max-width: 100%; }
+  h1 { font-size: 22pt; margin: 0 0 4pt; color: #0b223d; letter-spacing: -0.4pt; }
+  h1 + .sub { color: #5a6b80; margin: 0 0 18pt; font-size: 11pt; }
+  h2 { font-size: 14pt; margin: 22pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.5pt solid #d2691e; color: #0b223d; }
+  h3 { font-size: 11.5pt; margin: 14pt 0 4pt; color: #0b223d; }
+  p, ul, ol { margin: 4pt 0 6pt; }
+  ul, ol { padding-left: 18pt; }
+  li { margin: 2pt 0; }
+  code, pre { font-family: "SF Mono", "Menlo", Consolas, monospace; }
+  code { background: #f1efea; padding: 0.5pt 3pt; border-radius: 2pt; font-size: 9.2pt; }
+  pre { background: #0b223d; color: #ecf0f5; padding: 8pt 10pt; border-radius: 4pt; font-size: 9pt; line-height: 1.4; overflow: hidden; white-space: pre-wrap; }
+  pre code { background: transparent; color: inherit; padding: 0; font-size: inherit; }
+  pre .c { color: #8aa1bc; }
+  table { border-collapse: collapse; width: 100%; font-size: 9.6pt; margin: 6pt 0; }
+  th, td { text-align: left; vertical-align: top; padding: 4pt 7pt; border-bottom: 0.5pt solid #d4d4d4; }
+  th { background: #f1efea; color: #0b223d; font-weight: 600; border-bottom-color: #888; }
+  .callout { padding: 8pt 11pt; border-radius: 4pt; margin: 8pt 0; font-size: 9.8pt; }
+  .callout.warn { background: #fff4e0; border-left: 3pt solid #d2691e; }
+  .callout.tip { background: #eaf3ff; border-left: 3pt solid #1b4d8f; }
+  .callout strong { color: #0b223d; }
+  .step { font-weight: 600; color: #d2691e; }
+  .small { font-size: 9pt; color: #5a6b80; }
+  hr { border: 0; border-top: 0.5pt solid #d4d4d4; margin: 18pt 0; }
+  a { color: #1b4d8f; text-decoration: none; }
+  .pill { display: inline-block; background: #0b223d; color: #fff; font-size: 8.5pt; padding: 1pt 6pt; border-radius: 8pt; vertical-align: 1pt; }
+  .keep-together { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<h1>Meridian Newsroom — Local Setup Guide</h1>
+<p class="sub">Headless Drupal 11 + Next.js 14 article page. ~10–45 min from a fresh clone.</p>
+
+<h2>What you're getting</h2>
+<p>A two-half headless project. One Drupal 11 backend (content + JSON:API) and one Next.js 14 frontend rendering a single article page from that JSON:API. Both run locally; the dev URL is <code>http://localhost:3000/news/&lt;slug&gt;</code>.</p>
+
+<table>
+  <tr><th>Component</th><th>Tech</th><th>Runs at</th></tr>
+  <tr><td>Backend</td><td>Drupal 11, PHP 8.4, via DDEV (Docker)</td><td><code>https://meridian.ddev.site</code></td></tr>
+  <tr><td>Frontend</td><td>Next.js 14 App Router, TypeScript, RSC</td><td><code>http://localhost:3000</code></td></tr>
+</table>
+
+<h2>Prerequisites</h2>
+
+<p>Install all of these <em>before</em> cloning. On macOS via Homebrew:</p>
+
+<pre><code>brew install --cask orbstack         <span class="c"># or Docker Desktop — OrbStack is faster on Apple Silicon</span>
+brew install ddev mkcert node pnpm git
+mkcert -install                       <span class="c"># installs the mkcert root CA into your system trust store</span></code></pre>
+
+<table>
+  <tr><th>Tool</th><th>Min version</th><th>Why</th></tr>
+  <tr><td>Docker (OrbStack or Docker Desktop)</td><td>—</td><td>DDEV's container runtime</td></tr>
+  <tr><td>DDEV</td><td>1.23+</td><td>Boots the Drupal stack (web + db) in containers</td></tr>
+  <tr><td>mkcert</td><td>any</td><td>Issues a local TLS cert DDEV uses for <code>*.ddev.site</code></td></tr>
+  <tr><td>Node</td><td>18.18+ (20+ recommended)</td><td>Runs Next.js</td></tr>
+  <tr><td>pnpm</td><td>9+</td><td>Workspace package manager</td></tr>
+  <tr><td>git</td><td>any modern</td><td>Cloning</td></tr>
+</table>
+
+<div class="callout warn">
+<strong>Windows users:</strong> use WSL2 + Docker Desktop with WSL backend. Run all commands inside the WSL2 shell, not PowerShell. The <code>NODE_EXTRA_CA_CERTS</code> step (below) is especially fiddly on Windows — the mkcert CA path differs.
+</div>
+
+<h2>Setup — 7 steps</h2>
+
+<p><span class="step">Step 1.</span> Clone and install JS deps.</p>
+<pre><code>git clone https://github.com/Jdouville8/headless-next-drupal-example.git meridian
+cd meridian
+pnpm install                          <span class="c"># installs apps/web deps via workspaces</span></code></pre>
+
+<p><span class="step">Step 2.</span> Boot the Drupal containers. <strong>First boot will sudo-prompt</strong> to add <code>meridian.ddev.site</code> to <code>/etc/hosts</code> — type your password when asked.</p>
+<pre><code>cd apps/drupal
+ddev start                            <span class="c"># sudo prompt happens here, once</span></code></pre>
+
+<p><span class="step">Step 3.</span> Install Drupal core + contrib via Composer (runs inside the container).</p>
+<pre><code>ddev composer install                 <span class="c"># ~2 min on a fresh machine</span></code></pre>
+
+<p><span class="step">Step 4.</span> Install Drupal itself from the committed config, then seed the sample article.</p>
+<pre><code>ddev drush si --existing-config -y                 <span class="c"># builds schema from config/sync/</span>
+ddev drush scr scripts/seed-content.php            <span class="c"># creates the demo article (nid=3)</span></code></pre>
+
+<p class="small">Admin login if you need it: <code>ddev launch $(ddev drush uli)</code> — opens a one-shot login URL. Local creds are <code>admin / admin</code>.</p>
+
+<p><span class="step">Step 5.</span> Configure the Next.js env (back in the repo root).</p>
+<pre><code>cd ../web
+cat &gt; .env.local &lt;&lt;'EOF'
+NEXT_PUBLIC_USE_MOCK_DATA=false
+DRUPAL_BASE_URL=https://meridian.ddev.site
+NEXT_PUBLIC_SHOW_DEV_PANEL=true
+REVALIDATE_SECRET=replace-with-a-real-random-string
+EOF
+
+<span class="c"># then regenerate the secret with a real value:</span>
+SECRET=$(openssl rand -hex 32)
+sed -i.bak "s|replace-with-a-real-random-string|$SECRET|" .env.local && rm .env.local.bak</code></pre>
+
+<div class="callout warn keep-together">
+<strong>Step 6 — the critical one.</strong> Export the mkcert CA path <em>in the same shell</em> <em>before</em> launching <code>pnpm dev</code>. Putting this in <code>.env.local</code> does <em>not</em> work — Node reads <code>NODE_EXTRA_CA_CERTS</code> during TLS init, before Next.js loads its env files.
+<pre style="margin-top:6pt;"><code>export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"</code></pre>
+If you skip this you'll see <code>UNABLE_TO_VERIFY_LEAF_SIGNATURE</code> when the Next.js server tries to fetch from Drupal. Same shell, every time you start the dev server.
+</div>
+
+<p><span class="step">Step 7.</span> Start the dev server.</p>
+<pre><code>pnpm dev
+<span class="c"># → ready at http://localhost:3000</span>
+<span class="c"># → article at http://localhost:3000/news/meridian-industrial-debuts-continental-logistics-program-next-generation-fleet-operators</span></code></pre>
+
+<h2>Verifying it works</h2>
+
+<p>Open the article URL above in a browser. You should see a full press-release page with an amber title band, a navy pull-quote band with a portrait, and a footer with the Meridian wordmark.</p>
+
+<p>Sanity check from the terminal:</p>
+<pre><code>curl -s -o /dev/null -w '%{http_code}\n' \
+  http://localhost:3000/news/meridian-industrial-debuts-continental-logistics-program-next-generation-fleet-operators
+<span class="c"># → 200</span></code></pre>
+
+<p>If you see <strong>200</strong> with the expected layout, you're done. Open <code>Article Page (standalone).html</code> from the repo root in a second tab at 1440 px wide to do a side-by-side visual compare against the design.</p>
+
+<h2>Common gotchas</h2>
+
+<div class="callout warn keep-together">
+<strong>"Cannot find module './352.js'"</strong> in the browser, after running <code>pnpm build</code>.<br>
+The dev server and <code>pnpm build</code> both write to <code>apps/web/.next/</code>. Running build while dev is up clobbers the dev server's webpack chunks. Fix:
+<pre style="margin-top:6pt;"><code>pkill -f 'next dev'
+rm -rf apps/web/.next
+cd apps/web
+export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+pnpm dev</code></pre>
+Rule: stop dev before running build.
+</div>
+
+<div class="callout warn keep-together">
+<strong><code>UNABLE_TO_VERIFY_LEAF_SIGNATURE</code></strong> in the Next.js logs.<br>
+You forgot Step 6 (or you're in a fresh shell). Re-export <code>NODE_EXTRA_CA_CERTS</code> and relaunch <code>pnpm dev</code>. Consider adding the export line to your shell rc (<code>~/.zshrc</code>) if you'll do this often.
+</div>
+
+<div class="callout warn keep-together">
+<strong>DDEV port conflicts</strong> on <code>ddev start</code>.<br>
+Another DDEV project (or a host Apache/Caddy) holds 80/443. Run <code>ddev poweroff</code> to stop everything, then <code>cd apps/drupal &amp;&amp; ddev start</code> for just this one. If you keep multiple DDEV projects running, DDEV's router multiplexes them by hostname — that usually just works.
+</div>
+
+<div class="callout warn keep-together">
+<strong>JSON:API returns 500 with <code>'path' not found</code></strong> when the Next.js server fetches.<br>
+The custom <code>meridian_path_filter</code> module is disabled. It's required because Drupal core can't filter nodes by <code>path.alias</code> via JSON:API. Re-enable:
+<pre style="margin-top:6pt;"><code>cd apps/drupal &amp;&amp; ddev drush en meridian_path_filter -y</code></pre>
+</div>
+
+<div class="callout tip keep-together">
+<strong>Drupal content change isn't showing.</strong> Hard-refresh the browser (⌘⇧R). If it still doesn't, clear all caches:
+<pre style="margin-top:6pt;"><code>cd apps/drupal &amp;&amp; ddev drush cr            <span class="c"># Drupal cache</span>
+pkill -f 'next dev'                          <span class="c"># dev server (image-optimizer cache)</span>
+rm -rf apps/web/.next
+<span class="c"># restart dev with the NODE_EXTRA_CA_CERTS export</span></code></pre>
+</div>
+
+<h2>What you can do once it's running</h2>
+
+<ul>
+  <li><strong>Edit content in Drupal:</strong> log in via <code>ddev launch $(ddev drush uli)</code> (run from <code>apps/drupal/</code>). Edit the article, save, hard-refresh the Next.js page.</li>
+  <li><strong>Test the dev panel</strong> — bottom-right floating box. Toggle <em>Show JSON mapping</em> to label every DOM region with its source field. Switch the accent (amber → emerald → cobalt → scarlet) to verify the design tokens reflow.</li>
+  <li><strong>Trigger ISR revalidation</strong> from a script:
+<pre><code>SECRET=$(grep ^REVALIDATE_SECRET= apps/web/.env.local | cut -d= -f2)
+curl -X POST "http://localhost:3000/api/revalidate?secret=$SECRET&amp;path=/news/&lt;slug&gt;"</code></pre>
+  </li>
+</ul>
+
+<h2>Where to look when something goes deeper</h2>
+
+<table>
+  <tr><th>For…</th><th>Read</th></tr>
+  <tr><td>Full reference + deploy stubs + edge cases</td><td><code>RUNBOOK.md</code> at the repo root</td></tr>
+  <tr><td>Drupal-side specifics, fields, deviations from the spec</td><td><code>apps/drupal/HANDOFF.md</code></td></tr>
+  <tr><td>The data contract between Drupal and Next.js</td><td><code>JSON_CONTRACT.md</code> at the repo root</td></tr>
+  <tr><td>How a new paragraph type gets added</td><td><code>RUNBOOK.md</code> § "How to add a new paragraph type"</td></tr>
+  <tr><td>Visual-parity target</td><td><code>Article Page (standalone).html</code> at the repo root — open in a browser</td></tr>
+</table>
+
+<p class="small" style="margin-top: 22pt;">Generated for the <code>headless-next-drupal-example</code> repo. Tested on macOS 15 (Apple Silicon) with OrbStack + DDEV 1.25.</p>
+
+</body>
+</html>

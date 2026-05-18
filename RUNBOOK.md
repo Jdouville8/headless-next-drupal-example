@@ -2,6 +2,12 @@
 
 This repo was built from the `design_handoff_article_page` design handoff (`CLAUDE.md`, `README.md`, `JSON_CONTRACT.md` at the root). It is a two-half headless project: **Drupal 11** (DDEV) content backend + **Next.js 14 App Router** frontend rendering one article page from the Drupal JSON:API.
 
+> **First-time setup?** Read `docs/SETUP_GUIDE.pdf` first — it's a focused 4-page walkthrough for a clean clone-and-run. This RUNBOOK is the longer reference. Regenerate the PDF after editing `docs/setup-guide.html`:
+> ```bash
+> "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer \
+>   --print-to-pdf=docs/SETUP_GUIDE.pdf "file://$PWD/docs/setup-guide.html"
+> ```
+
 ## Current state
 
 - **Backend (`apps/drupal/`)** — provisioned. Drupal 11 on PHP 8.4 via DDEV. JSON:API + paragraphs + pathauto + the custom `meridian_path_filter` module are enabled. Sample article `nid=3`, slug `meridian-industrial-debuts-continental-logistics-program-next-generation-fleet-operators` is seeded and reachable at `https://meridian.ddev.site`.
