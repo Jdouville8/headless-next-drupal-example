@@ -161,17 +161,53 @@ function richTextValue(
  * for fields the contract requires as plain text — Drupal's `plain_text`
  * filter wraps the processed output in `<p>` and HTML-entity-encodes
  * characters like apostrophes, which we don't want leaking into UI strings.
+ *
+ * Defensive: if the stored `value` itself has been wrapped in a single
+ * `<p>...</p>` (e.g. because the format was silently switched to one that
+ * runs filter_autop, or because an upstream editor pasted markup into a
+ * plain-text-contract field), we strip the wrapper and decode the common
+ * entity set Drupal commonly emits. That way the rendered string is the
+ * plain text the contract promised.
  */
 function plainTextValue(
   v: ParagraphRichTextAttributes["field_text"] | NodeArticleAttributes["field_summary"],
 ): string {
   if (!v) return "";
-  if (typeof v === "string") return v;
-  if (typeof v === "object" && v !== null) {
-    if ("value" in v && typeof v.value === "string") return v.value;
-    if ("processed" in v && typeof v.processed === "string") return v.processed;
+  let s: string;
+  if (typeof v === "string") {
+    s = v;
+  } else if (typeof v === "object" && v !== null) {
+    if ("value" in v && typeof v.value === "string") {
+      s = v.value;
+    } else if ("processed" in v && typeof v.processed === "string") {
+      s = v.processed;
+    } else {
+      return "";
+    }
+  } else {
+    return "";
   }
-  return "";
+  // Strip a single wrapping <p>...</p>. Anchored, so we won't gobble
+  // mid-string <p>s.
+  s = s.replace(/^\s*<p>([\s\S]*?)<\/p>\s*$/, "$1");
+  return decodeHtmlEntities(s);
+}
+
+/**
+ * Decode the small entity set Drupal commonly emits for plain-text values.
+ * Order matters: numeric/hex entities first, then `&amp;` last among the
+ * named ones so we don't accidentally double-decode entities like `&amp;lt;`.
+ */
+function decodeHtmlEntities(s: string): string {
+  return s
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(parseInt(n, 10)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCharCode(parseInt(n, 16)))
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, "\"")
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&");
 }
 
 function legalNotesValue(v: NodeArticleAttributes["field_legal_notes"]): string[] {
@@ -362,7 +398,7 @@ export function normalizeArticle(
     id: node.id,
     attributes: {
       title,
-      summary: richTextValue(attrs.field_summary),
+      summary: plainTextValue(attrs.field_summary),
       dateline_location: stringOr(attrs.field_dateline_location, ""),
       published_at: published,
       read_minutes,
